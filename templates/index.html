@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampxTask — Student Productivity & Wellness OS</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- THREE-LAYER BACKGROUND ARCHITECTURE -->
+  <!-- LAYER 1: Fullscreen Fixed Pastel Gradient Image Asset -->
+  <div class="app-bg-layer" aria-hidden="true"></div>
+  <!-- LAYER 2: Subtle Atmospheric Blur & Translucent Overlay (Preserves Pastel Color Depth) -->
+  <div class="app-overlay-layer" aria-hidden="true"></div>
+
+  <!-- LAYER 3: FLOATING APPLICATION INTERFACE (NATIVE APPLE iOS EXPERIENCE) -->
+  <div class="app-container">
+
+    <!-- FLOATING APPLE GLASS ISLAND NAVIGATION -->
+    <header class="top-nav-glass" role="banner">
+      <div class="nav-content">
+        <!-- Brand Squircle & Title -->
+        <a href="#overview" class="brand-link" id="brand-logo-btn" aria-label="CampxTask Home">
+          <div class="apple-glyph-squircle" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <line x1="12" y1="2" x2="12" y2="6"></line>
+              <line x1="12" y1="18" x2="12" y2="22"></line>
+              <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+              <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+              <line x1="2" y1="12" x2="6" y2="12"></line>
+              <line x1="18" y1="12" x2="22" y2="12"></line>
+              <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+              <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+            </svg>
+          </div>
+          <div class="brand-copy">
+            <span class="app-title">CampxTask</span>
+            <span class="app-sub">Student OS</span>
+          </div>
+        </a>
+
+        <!-- iOS Segmented Control Pills -->
+        <nav class="view-segments" role="tablist" aria-label="Main Application Views">
+          <button type="button" class="view-pill active" data-view="overview" role="tab" aria-selected="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="2"></rect>
+            </svg>
+            <span>Overview</span>
+          </button>
+          <button type="button" class="view-pill" data-view="wellness" role="tab" aria-selected="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 16v-2.38C4 11.5 5.5 8 8 8c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+              <path d="M14 12v-2.38C14 7.5 15.5 4 18 4c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+              <circle cx="8" cy="5" r="1.5" fill="currentColor"></circle>
+              <circle cx="18" cy="19" r="1.5" fill="currentColor"></circle>
+            </svg>
+            <span>Wellness</span>
+          </button>
+          <button type="button" class="view-pill" data-view="schedule" role="tab" aria-selected="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Schedule</span>
+          </button>
+          <button type="button" class="view-pill" data-view="tasks" role="tab" aria-selected="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              <path d="m9 14 2 2 4-4"></path>
+            </svg>
+            <span>Tasks</span>
+          </button>
+          <button type="button" class="view-pill" data-view="insights" role="tab" aria-selected="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"></path>
+              <path d="m19 9-5 5-4-4-3 3"></path>
+            </svg>
+            <span>Insights</span>
+          </button>
+        </nav>
+
+        <!-- Right Utilities Capsule -->
+        <div class="nav-utilities">
+          <!-- Notification Bell -->
+          <button type="button" id="notif-perm-btn" class="glass-util-btn" title="Toggle browser notifications" aria-label="Notification settings">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span id="notif-status-dot" class="dot-indicator dot-disabled" aria-hidden="true"></span>
+          </button>
+
+          <!-- Live Digital Clock Capsule -->
+          <div class="live-clock-capsule" title="System Local Time">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span id="live-time-str">--:--:--</span>
+          </div>
+
+          <!-- Day/Night Animated Toggle -->
+          <button type="button" id="theme-toggle-btn" class="theme-glass-toggle" aria-label="Toggle day and night mode">
+            <div class="theme-knob">
+              <svg class="glyph-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg class="glyph-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN BODY: 5 DEDICATED APPLE iOS VIEWS -->
+    <main class="views-wrapper" role="main">
+
+      <!-- ===================================================================
+           VIEW 1: OVERVIEW (APPLE HEALTH & LIVE ACTIVITY EDITORIAL DASHBOARD)
+           =================================================================== -->
+      <section id="view-overview" class="app-view active" aria-labelledby="overview-heading">
+        
+        <!-- Large Editorial Apple Greeting -->
+        <div class="overview-editorial-hero">
+          <div class="editorial-eyebrow">
+            <span id="overview-date-str" class="eyebrow-date">Wednesday, November 4</span>
+            <span class="ios-status-chip">
+              <span class="pulse-beacon"></span>
+              <span>Cluster Active &bull; NodePort 30080</span>
+            </span>
+          </div>
+          <h1 id="overview-heading" class="hero-greeting">Good Morning</h1>
+          <p id="overview-summary-phrase" class="hero-subtext">Take a breath. You have 2 classes scheduled today and 2 assignments in progress.</p>
+        </div>
+
+        <!-- Asymmetric Apple Composition (Not 3 identical boxes!) -->
+        <div class="overview-asymmetric-layout">
+
+          <!-- LEFT COLUMN: LIVE ACTIVITIES & REMINDERS (WIDTH: ~58%) -->
+          <div class="overview-col-primary">
+            
+            <!-- Apple Live Activity: Next Upcoming Class Spotlight -->
+            <div class="glass-card next-class-spotlight">
+              <div class="spotlight-header">
+                <div class="live-activity-badge">
+                  <span class="live-activity-indicator"></span>
+                  <span id="spotlight-status-text">NEXT CLASS TODAY</span>
+                </div>
+                <div id="spotlight-countdown-pill" class="countdown-capsule">--:--:--</div>
+              </div>
+
+              <div class="spotlight-body">
+                <div class="spotlight-title-row">
+                  <h3 id="spotlight-subject-name" class="spotlight-subject">Distributed Systems</h3>
+                  <span id="spotlight-code-badge" class="apple-tag tag-indigo">CS401</span>
+                </div>
+                <div class="spotlight-chips-row">
+                  <span class="apple-chip chip-block" id="spotlight-block-chip">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M3 7v14M21 7v14M6 7V3h12v4"></path></svg>
+                    <span id="spotlight-block-val">Turing Block</span>
+                  </span>
+                  <span class="apple-chip chip-room" id="spotlight-room-chip">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span id="spotlight-room-val">Room 302</span>
+                  </span>
+                  <span class="apple-chip chip-time" id="spotlight-time-chip">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span id="spotlight-time-val">09:30 - 11:00 AM</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="spotlight-footer">
+                <span id="spotlight-faculty-text" class="faculty-note">Prof. Katherine Johnson</span>
+                <button type="button" class="apple-link-btn" onclick="window.CampxNav.switchTo('schedule')">
+                  <span>View Schedule</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Apple Reminders: Priority Assignments -->
+            <div class="glass-card today-tasks-card">
+              <div class="card-head-row">
+                <div class="head-title-wrap">
+                  <span class="apple-squircle-icon icon-coral-soft">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="m9 14 2 2 4-4"></path></svg>
+                  </span>
+                  <h3 class="card-headline">Priority Assignments</h3>
+                </div>
+                <span id="overview-pending-counter" class="subtle-count">2 pending</span>
+              </div>
+
+              <div id="overview-tasks-container" class="overview-mini-list">
+                <!-- Dynamically populated with Apple Reminders checkboxes -->
+              </div>
+
+              <div class="card-action-bar">
+                <button type="button" class="apple-link-btn" onclick="window.CampxNav.switchTo('tasks')">
+                  <span>Open Task Planner</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT COLUMN: APPLE FITNESS CONCENTRIC ACTIVITY RINGS (WIDTH: ~42%) -->
+          <div class="overview-col-secondary">
+            
+            <div class="glass-card apple-fitness-card">
+              <div class="fitness-card-head">
+                <div class="head-title-wrap">
+                  <span class="apple-squircle-icon icon-emerald-soft">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
+                  </span>
+                  <h3 class="card-headline">Activity Rings</h3>
+                </div>
+                <span id="overview-score-num" class="score-capsule">0%</span>
+              </div>
+
+              <!-- Iconic Apple Concentric Rings SVG -->
+              <div class="concentric-rings-wrap">
+                <svg class="concentric-rings-svg" viewBox="0 0 140 140">
+                  <!-- Outer Track & Ring: Steps (Coral) -->
+                  <circle class="ring-bg-track" cx="70" cy="70" r="54"></circle>
+                  <circle id="overview-ring-steps" class="ring-active-stroke stroke-steps" cx="70" cy="70" r="54"></circle>
+
+                  <!-- Middle Track & Ring: Water (Cyan) -->
+                  <circle class="ring-bg-track" cx="70" cy="70" r="42"></circle>
+                  <circle id="overview-ring-water" class="ring-active-stroke stroke-water" cx="70" cy="70" r="42"></circle>
+
+                  <!-- Inner Track & Ring: Sleep (Lavender) -->
+                  <circle class="ring-bg-track" cx="70" cy="70" r="30"></circle>
+                  <circle id="overview-ring-sleep" class="ring-active-stroke stroke-sleep" cx="70" cy="70" r="30"></circle>
+                </svg>
+
+                <!-- Hidden ring element for backwards compatibility with single ring script -->
+                <svg class="visually-hidden"><circle id="overview-score-ring"></circle></svg>
+
+                <!-- Center Fitness Glyphs -->
+                <div class="rings-center-legend">
+                  <span class="center-score-title">DAILY</span>
+                  <span class="center-score-sub">HARMONY</span>
+                </div>
+              </div>
+
+              <!-- Metric Breakdown Rows -->
+              <div class="fitness-breakdown-list">
+                <div class="fitness-row">
+                  <span class="ring-color-bullet bullet-steps"></span>
+                  <span class="metric-name">Move &bull; Steps</span>
+                  <span id="overview-steps-pct" class="metric-pct">0%</span>
+                </div>
+                <div class="fitness-row">
+                  <span class="ring-color-bullet bullet-water"></span>
+                  <span class="metric-name">Hydration &bull; Water</span>
+                  <span id="overview-water-pct" class="metric-pct">0%</span>
+                </div>
+                <div class="fitness-row">
+                  <span class="ring-color-bullet bullet-sleep"></span>
+                  <span class="metric-name">Rest &bull; Sleep</span>
+                  <span id="overview-sleep-pct" class="metric-pct">0%</span>
+                </div>
+                <div class="fitness-row">
+                  <span class="ring-color-bullet bullet-tasks"></span>
+                  <span class="metric-name">Tasks &bull; Planner</span>
+                  <span id="overview-tasks-pct" class="metric-pct">0%</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- COMPACT APPLE HEALTH VITALS TILES (BOTTOM ROW) -->
+        <div class="overview-vitals-shelf">
+          
+          <!-- Steps Tile -->
+          <div class="glass-card-subtle vital-tile" onclick="window.CampxNav.switchTo('wellness')" role="button" tabindex="0">
+            <div class="vital-tile-top">
+              <span class="apple-squircle-icon icon-coral-soft">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 16v-2.38C4 11.5 5.5 8 8 8c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+                  <path d="M14 12v-2.38C14 7.5 15.5 4 18 4c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+                  <circle cx="8" cy="5" r="1.5" fill="currentColor"></circle>
+                  <circle cx="18" cy="19" r="1.5" fill="currentColor"></circle>
+                </svg>
+              </span>
+              <span class="vital-label">STEPS</span>
+              <span class="vital-arrow">&rsaquo;</span>
+            </div>
+            <div class="vital-tile-digits">
+              <span id="overview-steps-val" class="vital-big-num">0</span>
+              <span id="overview-steps-sub" class="vital-target-desc">Goal: 8,000</span>
+            </div>
+          </div>
+
+          <!-- Hydration Tile -->
+          <div class="glass-card-subtle vital-tile" onclick="window.CampxNav.switchTo('wellness')" role="button" tabindex="0">
+            <div class="vital-tile-top">
+              <span class="apple-squircle-icon icon-cyan-soft">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                </svg>
+              </span>
+              <span class="vital-label">HYDRATION</span>
+              <span class="vital-arrow">&rsaquo;</span>
+            </div>
+            <div class="vital-tile-digits">
+              <span id="overview-water-val" class="vital-big-num">0 ml</span>
+              <span id="overview-water-sub" class="vital-target-desc">Goal: 2.5L</span>
+            </div>
+          </div>
+
+          <!-- Sleep Tile -->
+          <div class="glass-card-subtle vital-tile" onclick="window.CampxNav.switchTo('wellness')" role="button" tabindex="0">
+            <div class="vital-tile-top">
+              <span class="apple-squircle-icon icon-lavender-soft">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  <path d="M17 3v3M19 4.5h-4M19 13v2M20 14h-2"></path>
+                </svg>
+              </span>
+              <span class="vital-label">SLEEP</span>
+              <span class="vital-arrow">&rsaquo;</span>
+            </div>
+            <div class="vital-tile-digits">
+              <span id="overview-sleep-val" class="vital-big-num">0.0h</span>
+              <span id="overview-sleep-sub" class="vital-target-desc">Target: 8.0h</span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================================================
+           VIEW 2: WELLNESS (DEDICATED APPLE HEALTH VITALITY HUB)
+           =================================================================== -->
+      <section id="view-wellness" class="app-view" aria-labelledby="wellness-heading">
+        <div class="view-header-row">
+          <div>
+            <span class="section-eyebrow">Apple Health OS</span>
+            <h2 id="wellness-heading" class="view-title">Wellness Hub</h2>
+          </div>
+          <button type="button" id="open-goals-btn" class="glass-btn-ultra">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+            <span>Adjust Health Goals</span>
+          </button>
+        </div>
+
+        <div class="wellness-tri-layout">
+          
+          <!-- 1. STEP ACTIVITY TRACKER -->
+          <div class="glass-card wellness-tile">
+            <div class="w-card-head">
+              <div class="w-badge-tag tag-steps">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 16v-2.38C4 11.5 5.5 8 8 8c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+                  <path d="M14 12v-2.38C14 7.5 15.5 4 18 4c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+                  <circle cx="8" cy="5" r="1.5" fill="currentColor"></circle>
+                  <circle cx="18" cy="19" r="1.5" fill="currentColor"></circle>
+                </svg>
+                <span>Step Activity</span>
+              </div>
+              <span id="wellness-step-goal-tag" class="w-goal-text">Goal: 8,000</span>
+            </div>
+
+            <div class="gauge-center-wrapper">
+              <svg class="wellness-gauge-svg" viewBox="0 0 140 140">
+                <circle class="gauge-bg" cx="70" cy="70" r="58"></circle>
+                <circle id="wellness-step-ring" class="gauge-fg stroke-coral" cx="70" cy="70" r="58"></circle>
+              </svg>
+              <div class="gauge-digits">
+                <div class="gauge-squircle icon-coral-soft" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 16v-2.38C4 11.5 5.5 8 8 8c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+                    <path d="M14 12v-2.38C14 7.5 15.5 4 18 4c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+                    <circle cx="8" cy="5" r="1.5" fill="currentColor"></circle>
+                    <circle cx="18" cy="19" r="1.5" fill="currentColor"></circle>
+                  </svg>
+                </div>
+                <span id="wellness-steps-num" class="digits-hero">0</span>
+                <span class="digits-sub">STEPS TODAY</span>
+                <span id="wellness-steps-pct" class="digits-pct">0% of target</span>
+              </div>
+            </div>
+
+            <div class="pill-buttons-row">
+              <button type="button" class="apple-glass-pill" onclick="window.Campx.addSteps(250)">+250</button>
+              <button type="button" class="apple-glass-pill" onclick="window.Campx.addSteps(500)">+500</button>
+              <button type="button" class="apple-glass-pill" onclick="window.Campx.addSteps(1000)">+1,000</button>
+              <button type="button" class="apple-glass-pill pill-dashed" id="open-exact-steps-btn">Set</button>
+            </div>
+
+            <div class="sensor-info-footer">
+              <div class="sensor-indicator">
+                <span class="sensor-dot"></span>
+                <span id="sensor-caption">Manual Input (Desktop)</span>
+              </div>
+              <button type="button" id="motion-perm-btn" class="apple-link-btn">Connect Sensor</button>
+            </div>
+          </div>
+
+          <!-- 2. WATER VESSEL STATION (DISTINCTIVE TRANSLUCENT DRINKING GLASS ILLUSTRATION) -->
+          <div class="glass-card wellness-tile water-tumbler-tile">
+            <div class="w-card-head">
+              <div class="w-badge-tag tag-water">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                </svg>
+                <span>Hydration</span>
+              </div>
+              <span id="wellness-water-goal-tag" class="w-goal-text">Goal: 2,500 ml</span>
+            </div>
+
+            <!-- Distinctive Translucent Drinking Glass Vessel Illustration with Dynamic Wave Fill -->
+            <div class="water-vessel-presentation">
+              <svg class="water-glass-svg" viewBox="0 0 160 180" aria-label="Translucent Glass Water Vessel">
+                <defs>
+                  <!-- Cyan Liquid Gradient -->
+                  <linearGradient id="apple-water-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.9"></stop>
+                    <stop offset="50%" stop-color="#00B0FF" stop-opacity="0.92"></stop>
+                    <stop offset="100%" stop-color="#00838F" stop-opacity="0.98"></stop>
+                  </linearGradient>
+
+                  <!-- Glass Vessel Inner Clip Path -->
+                  <clipPath id="glass-inner-clip">
+                    <path d="M 32 18 L 40 152 Q 42 164 54 164 L 106 164 Q 118 164 120 152 L 128 18 Z"></path>
+                  </clipPath>
+                </defs>
+
+                <!-- Back Layer of Glass Wall with Specular Refraction -->
+                <path d="M 30 16 L 38 154 Q 40 166 54 166 L 106 166 Q 120 166 122 154 L 130 16 Z" 
+                      fill="rgba(255, 255, 255, 0.25)" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2"></path>
+
+                <!-- Dynamic Liquid Body Inside Tumbler Vessel -->
+                <g clip-path="url(#glass-inner-clip)">
+                  <!-- Liquid Fill Rectangle (height and y updated via JavaScript) -->
+                  <rect id="water-tumbler-fill-rect" x="20" y="164" width="120" height="0" fill="url(#apple-water-gradient)" style="transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);"></rect>
+                  
+                  <!-- Animated Wave Crest Group -->
+                  <g id="water-wave-group" transform="translate(0, 164)" style="transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);">
+                    <path class="fluid-wave-path" d="M 0 0 Q 30 -6 60 0 T 120 0 T 180 0 T 240 0 L 240 30 L 0 30 Z" fill="#00E5FF" opacity="0.65"></path>
+                  </g>
+
+                  <!-- Floating Micro-bubbles -->
+                  <circle cx="55" cy="135" r="3" fill="#ffffff" opacity="0.55" class="bubble-anim b1"></circle>
+                  <circle cx="95" cy="115" r="2" fill="#ffffff" opacity="0.45" class="bubble-anim b2"></circle>
+                  <circle cx="75" cy="145" r="2.5" fill="#ffffff" opacity="0.65" class="bubble-anim b3"></circle>
+                </g>
+
+                <!-- Front Glass Wall & Specular Edge Lighting -->
+                <path d="M 30 16 L 38 154 Q 40 166 54 166 L 106 166 Q 120 166 122 154 L 130 16 Z" 
+                      fill="none" stroke="rgba(255, 255, 255, 0.85)" stroke-width="2.5"></path>
+
+                <!-- Specular Reflection Streak across Left Rim -->
+                <path d="M 36 24 L 43 148 Q 44 156 52 156" fill="none" stroke="rgba(255, 255, 255, 0.75)" stroke-width="3" stroke-linecap="round"></path>
+
+                <!-- Top Oval Rim Reflection -->
+                <ellipse cx="80" cy="18" rx="49" ry="8" fill="rgba(255, 255, 255, 0.35)" stroke="rgba(255, 255, 255, 0.85)" stroke-width="1.8"></ellipse>
+              </svg>
+
+              <!-- Central Digital Readout Inside Glass -->
+              <div class="water-digits-overlay">
+                <span id="wellness-water-num" class="digits-hero">0</span>
+                <span class="digits-sub">ML CONSUMED</span>
+                <span id="wellness-water-rem" class="digits-pct water-color">2,500 ml left</span>
+              </div>
+            </div>
+
+            <!-- Backwards-Compatible Ring for Gauge Script -->
+            <div class="visually-hidden">
+              <svg><circle id="wellness-water-ring"></circle></svg>
+            </div>
+
+            <!-- Quick Add Pill Controls -->
+            <div class="pill-buttons-row">
+              <button type="button" class="apple-glass-pill" onclick="window.Campx.addWater(250)">+250 ml</button>
+              <button type="button" class="apple-glass-pill" onclick="window.Campx.addWater(500)">+500 ml</button>
+              <button type="button" class="apple-glass-pill" onclick="window.Campx.addWater(750)">+750 ml</button>
+              <button type="button" class="apple-glass-pill pill-dashed" id="undo-water-action-btn">Undo</button>
+            </div>
+
+            <!-- Hydration Reminder Configuration -->
+            <div class="reminder-control-bar">
+              <div class="reminder-select-wrap">
+                <label for="hydration-interval-picker" class="mini-label">Alert Every:</label>
+                <select id="hydration-interval-picker" class="apple-glass-select">
+                  <option value="30">30 min</option>
+                  <option value="45">45 min</option>
+                  <option value="60" selected>60 min</option>
+                  <option value="90">90 min</option>
+                  <option value="120">2 hours</option>
+                </select>
+              </div>
+              <label class="ios-switch" title="Toggle browser hydration alerts">
+                <input type="checkbox" id="hydration-active-checkbox">
+                <span class="ios-slider"></span>
+              </label>
+            </div>
+            <p class="reminder-disclaimer">*Hydration alerts deliver while this browser tab stays open.</p>
+          </div>
+
+          <!-- 3. SLEEP & RESTORATION TRACKER (LAVENDER MOON & REST RING) -->
+          <div class="glass-card wellness-tile">
+            <div class="w-card-head">
+              <div class="w-badge-tag tag-sleep">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  <path d="M17 3v3M19 4.5h-4M19 13v2M20 14h-2"></path>
+                </svg>
+                <span>Sleep & Rest</span>
+              </div>
+              <span id="wellness-sleep-goal-tag" class="w-goal-text">Target: 8.0 hrs</span>
+            </div>
+
+            <div class="gauge-center-wrapper">
+              <svg class="wellness-gauge-svg" viewBox="0 0 140 140">
+                <circle class="gauge-bg" cx="70" cy="70" r="58"></circle>
+                <circle id="wellness-sleep-ring" class="gauge-fg stroke-sleep" cx="70" cy="70" r="58"></circle>
+              </svg>
+              <div class="gauge-digits">
+                <div class="gauge-squircle icon-lavender-soft" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <path d="M17 3v3M19 4.5h-4M19 13v2M20 14h-2"></path>
+                  </svg>
+                </div>
+                <span id="wellness-sleep-calculated" class="digits-hero">8h 30m</span>
+                <span class="digits-sub">ESTIMATED REST</span>
+                <span id="wellness-sleep-quality-tag" class="digits-pct sleep-color">Optimal Rest</span>
+              </div>
+            </div>
+
+            <div class="sleep-time-dual-row">
+              <div class="sleep-input-cell">
+                <label for="wellness-bedtime-input">Bedtime</label>
+                <input type="time" id="wellness-bedtime-input" class="apple-time-picker" value="23:00">
+              </div>
+              <div class="sleep-arrow">&rarr;</div>
+              <div class="sleep-input-cell">
+                <label for="wellness-waketime-input">Wake Up</label>
+                <input type="time" id="wellness-waketime-input" class="apple-time-picker" value="07:30">
+              </div>
+            </div>
+
+            <div class="sleep-stats-banner">
+              <button type="button" id="record-sleep-btn" class="glass-btn-primary-mini">Log Sleep Session</button>
+            </div>
+
+            <div class="reminder-control-bar">
+              <div class="reminder-select-wrap">
+                <label for="bedtime-alert-time" class="mini-label">Bedtime Alert:</label>
+                <input type="time" id="bedtime-alert-time" class="apple-time-picker-mini" value="22:30">
+              </div>
+              <label class="ios-switch" title="Toggle bedtime alert">
+                <input type="checkbox" id="bedtime-alert-checkbox">
+                <span class="ios-slider"></span>
+              </label>
+            </div>
+            <p class="reminder-disclaimer">*Maintains 7-day rest quality history automatically.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 3: SCHEDULE (ACADEMIC TIMETABLE & TIMELINE CARDS)
+           =================================================================== -->
+      <section id="view-schedule" class="app-view" aria-labelledby="schedule-heading">
+        <div class="view-header-row">
+          <div>
+            <span class="section-eyebrow">Academic Timetable</span>
+            <h2 id="schedule-heading" class="view-title">Class Schedule</h2>
+          </div>
+
+          <div class="schedule-head-actions">
+            <!-- View Mode Switch: Today vs Full Week -->
+            <div class="glass-segmented-mini" role="tablist">
+              <button type="button" class="seg-btn active" data-sched-filter="today">Today</button>
+              <button type="button" class="seg-btn" data-sched-filter="all">Full Week</button>
+            </div>
+
+            <div class="reminder-timing-wrap">
+              <label for="class-alert-mins-select" class="visually-hidden">Alert timing</label>
+              <select id="class-alert-mins-select" class="apple-glass-select">
+                <option value="5">Alert 5m before</option>
+                <option value="10" selected>Alert 10m before</option>
+                <option value="15">Alert 15m before</option>
+              </select>
+            </div>
+
+            <button type="button" id="btn-open-add-class" class="apple-coral-button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>Add Class</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Next Class Spotlight Banner -->
+        <div class="glass-card timetable-hero-card">
+          <div class="hero-card-left">
+            <div class="status-live-tag">
+              <span class="live-activity-indicator"></span>
+              <span id="timetable-live-status">NEXT CLASS TODAY</span>
+            </div>
+            <div class="title-with-code">
+              <h3 id="timetable-next-subject" class="subject-hero-title">Distributed Systems</h3>
+              <span id="timetable-next-code" class="apple-tag tag-indigo">CS401</span>
+            </div>
+            <div class="timetable-details-chips">
+              <span class="apple-chip chip-block" id="timetable-bubble-block">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M3 7v14M21 7v14M6 7V3h12v4"></path></svg>
+                <strong id="timetable-block-val">Turing Academic Block</strong>
+              </span>
+              <span class="apple-chip chip-room" id="timetable-bubble-room">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="10" r="3"></circle><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path></svg>
+                <span id="timetable-room-val">Room 302</span>
+              </span>
+              <span class="apple-chip chip-classnum" id="timetable-bubble-classnum">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="6" x2="12" y2="12"></line></svg>
+                <span id="timetable-classnum-val">Lecture 08</span>
+              </span>
+              <span class="apple-chip chip-time" id="timetable-bubble-time">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span id="timetable-time-val">09:30 - 11:00 AM</span>
+              </span>
+              <span class="apple-chip chip-faculty" id="timetable-bubble-faculty">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span id="timetable-faculty-val">Prof. Katherine Johnson</span>
+              </span>
+            </div>
+          </div>
+          <div class="hero-card-right countdown-column">
+            <span class="countdown-eyebrow">TIME TO CLASS</span>
+            <span id="timetable-live-countdown" class="countdown-digits">--:--:--</span>
+            <span id="timetable-countdown-sub" class="countdown-hint">Starts today</span>
+          </div>
+        </div>
+
+        <!-- Class Cards Grid (Spacious Timetable Cards) -->
+        <div id="schedule-cards-grid" class="timetable-grid" role="region" aria-live="polite">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Empty Schedule State -->
+        <div id="schedule-empty-view" class="glass-card empty-glass-card hidden">
+          <div class="empty-glyph-squircle" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <h4 class="empty-title">No Classes on Schedule</h4>
+          <p class="empty-desc">You have no classes matching this timetable filter. Add courses from your curriculum!</p>
+          <button type="button" class="apple-coral-button" onclick="document.getElementById('btn-open-add-class').click()">+ Add Course</button>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 4: TASKS (APPLE REMINDERS MINIMALIST PLANNER)
+           =================================================================== -->
+      <section id="view-tasks" class="app-view" aria-labelledby="tasks-heading">
+        <div class="view-header-row">
+          <div>
+            <span class="section-eyebrow">Apple Reminders OS</span>
+            <h2 id="tasks-heading" class="view-title">Task Planner</h2>
+          </div>
+
+          <div class="planner-stats-group">
+            <div class="planner-stat-pill">
+              <span class="p-lbl">Total</span>
+              <span id="planner-count-total" class="p-val">0</span>
+            </div>
+            <div class="planner-stat-pill">
+              <span class="p-lbl">Pending</span>
+              <span id="planner-count-pending" class="p-val val-amber">0</span>
+            </div>
+            <div class="planner-stat-pill">
+              <span class="p-lbl">Done</span>
+              <span id="planner-count-done" class="p-val val-emerald">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="planner-two-col">
+          <!-- Add Assignment Form Glass Card -->
+          <div class="glass-card planner-form-card">
+            <div class="planner-form-head">
+              <div class="apple-squircle-icon icon-coral-soft" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </div>
+              <h3 class="form-title">New Assignment</h3>
+            </div>
+
+            <form id="planner-add-task-form" novalidate>
+              <div class="input-field-block">
+                <label for="task-input-title">Title <span class="coral-star">*</span></label>
+                <input type="text" id="task-input-title" class="apple-glass-input" placeholder="e.g. Distributed Consensus Lab" required maxlength="120" autocomplete="off">
+                <span id="task-error-title" class="field-error-hint" aria-live="polite"></span>
+              </div>
+
+              <div class="input-field-block">
+                <label for="task-input-deadline">Deadline <span class="coral-star">*</span></label>
+                <input type="date" id="task-input-deadline" class="apple-glass-input" required>
+                <span id="task-error-deadline" class="field-error-hint" aria-live="polite"></span>
+              </div>
+
+              <div class="input-field-block">
+                <label for="task-input-desc">Notes & Deliverables</label>
+                <textarea id="task-input-desc" class="apple-glass-input apple-textarea" rows="3" placeholder="Submission rubric, git repo, or study notes..." maxlength="500"></textarea>
+              </div>
+
+              <button type="submit" id="task-submit-button" class="apple-coral-button btn-full-width">
+                <span>Add to Planner</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- Tasks List Display Card -->
+          <div class="glass-card planner-list-card">
+            <div class="planner-filter-bar">
+              <div class="glass-segmented-mini" role="tablist">
+                <button type="button" class="task-filter-pill active" data-filter="all">All</button>
+                <button type="button" class="task-filter-pill" data-filter="pending">Pending</button>
+                <button type="button" class="task-filter-pill" data-filter="completed">Done</button>
+              </div>
+
+              <div class="planner-search-wrap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="planner-search-box" class="apple-glass-search" placeholder="Search tasks..." aria-label="Search assignments">
+              </div>
+            </div>
+
+            <!-- Task Items Container -->
+            <div id="planner-items-container" class="planner-items-stack" role="region" aria-live="polite">
+              <!-- Populated dynamically via JS -->
+            </div>
+
+            <div id="planner-empty-view" class="glass-card empty-glass-card hidden">
+              <div class="empty-glyph-squircle" aria-hidden="true">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </div>
+              <h4 class="empty-title">All Caught Up</h4>
+              <p class="empty-desc">No assignments found matching this filter. Enjoy your free time or add a new task!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 5: INSIGHTS (CLEAN APPLE HEALTH TRENDS ANALYTICS)
+           =================================================================== -->
+      <section id="view-insights" class="app-view" aria-labelledby="insights-heading">
+        <div class="view-header-row">
+          <div>
+            <span class="section-eyebrow">Apple Health Trends</span>
+            <h2 id="insights-heading" class="view-title">Productivity Insights</h2>
+          </div>
+          <span class="apple-tag tag-indigo">Past 7 Days</span>
+        </div>
+
+        <div class="insights-dual-grid">
+          <!-- 1. Steps Chart -->
+          <div class="glass-card chart-tile">
+            <div class="chart-top-row">
+              <div>
+                <span class="chart-eyebrow">Physical Wellness</span>
+                <h4 class="chart-title">Weekly Steps Activity</h4>
+              </div>
+              <span id="chart-steps-average" class="chart-badge-stat">Avg: 0 / day</span>
+            </div>
+            <div id="insights-chart-steps" class="chart-svg-host"></div>
+          </div>
+
+          <!-- 2. Hydration Chart -->
+          <div class="glass-card chart-tile">
+            <div class="chart-top-row">
+              <div>
+                <span class="chart-eyebrow">Hydration Intake</span>
+                <h4 class="chart-title">Water Consumption (ml)</h4>
+              </div>
+              <span id="chart-water-average" class="chart-badge-stat">Avg: 0 ml / day</span>
+            </div>
+            <div id="insights-chart-water" class="chart-svg-host"></div>
+          </div>
+
+          <!-- 3. Sleep Trend Chart -->
+          <div class="glass-card chart-tile">
+            <div class="chart-top-row">
+              <div>
+                <span class="chart-eyebrow">Recovery</span>
+                <h4 class="chart-title">Sleep Duration (hours)</h4>
+              </div>
+              <span id="chart-sleep-average" class="chart-badge-stat">Avg: 0.0 hrs / night</span>
+            </div>
+            <div id="insights-chart-sleep" class="chart-svg-host"></div>
+          </div>
+
+          <!-- 4. Tasks & Productivity Ratio -->
+          <div class="glass-card chart-tile">
+            <div class="chart-top-row">
+              <div>
+                <span class="chart-eyebrow">Efficiency</span>
+                <h4 class="chart-title">Task Completion Ratio</h4>
+              </div>
+              <span id="chart-tasks-completion-rate" class="chart-badge-stat">0% Completed</span>
+            </div>
+            <div id="insights-chart-tasks" class="chart-svg-host donut-center-host"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FLOATING APPLE BOTTOM DOCK (MOBILE NAVIGATION) -->
+    <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Bar">
+      <div class="dock-capsule">
+        <button type="button" class="dock-btn active" data-view="overview" aria-label="Overview">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="2"></rect>
+          </svg>
+        </button>
+        <button type="button" class="dock-btn" data-view="wellness" aria-label="Wellness">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 16v-2.38C4 11.5 5.5 8 8 8c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+            <path d="M14 12v-2.38C14 7.5 15.5 4 18 4c1.5 0 2 1 2 2.5v4c0 1.5-1 3.5-3 3.5-1.5 0-3-.5-3-2z"></path>
+            <circle cx="8" cy="5" r="1.5" fill="currentColor"></circle>
+            <circle cx="18" cy="19" r="1.5" fill="currentColor"></circle>
+          </svg>
+        </button>
+        <button type="button" class="dock-btn" data-view="schedule" aria-label="Schedule">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </button>
+        <button type="button" class="dock-btn" data-view="tasks" aria-label="Tasks">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+            <path d="m9 14 2 2 4-4"></path>
+          </svg>
+        </button>
+        <button type="button" class="dock-btn" data-view="insights" aria-label="Insights">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"></path>
+            <path d="m19 9-5 5-4-4-3 3"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Subtle Footer -->
+    <footer class="app-spacious-footer">
+      <p>CampxTask &bull; Designed in California &bull; Docker & Kubernetes Ready</p>
+    </footer>
+  </div>
+
+  <!-- ===================================================================
+       MODALS (APPLE iOS FROSTED GLASS SHEETS)
+       =================================================================== -->
+
+  <!-- MODAL: ADD / EDIT CLASS -->
+  <div id="modal-class" class="ios-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-class-title">
+    <div class="ios-modal-window">
+      <div class="modal-grabber-bar"></div>
+      <div class="modal-top">
+        <h3 id="modal-class-title">Add Course to Schedule</h3>
+        <button type="button" class="modal-close-btn" id="close-modal-class" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="form-class-schedule" novalidate>
+        <input type="hidden" id="modal-class-id" value="">
+
+        <div class="form-grid-2">
+          <div class="input-field-block">
+            <label for="input-class-subject">Course Name <span class="coral-star">*</span></label>
+            <input type="text" id="input-class-subject" class="apple-glass-input" placeholder="e.g. Distributed Systems" required maxlength="80">
+            <span id="error-class-subject" class="field-error-hint" aria-live="polite"></span>
+          </div>
+          <div class="input-field-block">
+            <label for="input-class-code">Course Code <span class="coral-star">*</span></label>
+            <input type="text" id="input-class-code" class="apple-glass-input" placeholder="e.g. CS401" required maxlength="20">
+          </div>
+        </div>
+
+        <div class="form-grid-3">
+          <div class="input-field-block">
+            <label for="input-class-number">Class / Lec #</label>
+            <input type="text" id="input-class-number" class="apple-glass-input" placeholder="e.g. Lecture 08">
+          </div>
+          <div class="input-field-block">
+            <label for="input-class-block">Building / Block <span class="coral-star">*</span></label>
+            <input type="text" id="input-class-block" class="apple-glass-input" placeholder="e.g. Turing Block" required>
+          </div>
+          <div class="input-field-block">
+            <label for="input-class-room">Room # <span class="coral-star">*</span></label>
+            <input type="text" id="input-class-room" class="apple-glass-input" placeholder="e.g. Room 302" required>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="input-field-block">
+            <label for="input-class-start">Start Time <span class="coral-star">*</span></label>
+            <input type="time" id="input-class-start" class="apple-glass-input" required value="09:30">
+          </div>
+          <div class="input-field-block">
+            <label for="input-class-end">End Time <span class="coral-star">*</span></label>
+            <input type="time" id="input-class-end" class="apple-glass-input" required value="11:00">
+          </div>
+        </div>
+
+        <div class="input-field-block">
+          <label>Days of the Week <span class="coral-star">*</span></label>
+          <div class="weekdays-selector">
+            <label class="weekday-pill"><input type="checkbox" name="sched-day" value="Monday"><span>Mon</span></label>
+            <label class="weekday-pill"><input type="checkbox" name="sched-day" value="Tuesday"><span>Tue</span></label>
+            <label class="weekday-pill"><input type="checkbox" name="sched-day" value="Wednesday"><span>Wed</span></label>
+            <label class="weekday-pill"><input type="checkbox" name="sched-day" value="Thursday"><span>Thu</span></label>
+            <label class="weekday-pill"><input type="checkbox" name="sched-day" value="Friday"><span>Fri</span></label>
+            <label class="weekday-pill"><input type="checkbox" name="sched-day" value="Saturday"><span>Sat</span></label>
+          </div>
+          <span id="error-class-days" class="field-error-hint" aria-live="polite"></span>
+        </div>
+
+        <div class="input-field-block">
+          <label for="input-class-faculty">Faculty / Instructor (Optional)</label>
+          <input type="text" id="input-class-faculty" class="apple-glass-input" placeholder="e.g. Prof. Katherine Johnson">
+        </div>
+
+        <div class="modal-footer-btns">
+          <button type="button" class="glass-btn-subtle" id="cancel-modal-class">Cancel</button>
+          <button type="submit" class="apple-coral-button">Save Course</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EDIT TASK -->
+  <div id="modal-task-edit" class="ios-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-task-title">
+    <div class="ios-modal-window">
+      <div class="modal-grabber-bar"></div>
+      <div class="modal-top">
+        <h3 id="modal-task-title">Edit Assignment</h3>
+        <button type="button" class="modal-close-btn" id="close-modal-task" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="form-task-edit" novalidate>
+        <input type="hidden" id="modal-task-id" value="">
+
+        <div class="input-field-block">
+          <label for="edit-task-title">Title <span class="coral-star">*</span></label>
+          <input type="text" id="edit-task-title" class="apple-glass-input" required maxlength="120">
+          <span id="edit-task-error" class="field-error-hint" aria-live="polite"></span>
+        </div>
+
+        <div class="input-field-block">
+          <label for="edit-task-deadline">Deadline <span class="coral-star">*</span></label>
+          <input type="date" id="edit-task-deadline" class="apple-glass-input" required>
+        </div>
+
+        <div class="input-field-block">
+          <label for="edit-task-description">Description & Notes</label>
+          <textarea id="edit-task-description" class="apple-glass-input apple-textarea" rows="3" maxlength="500"></textarea>
+        </div>
+
+        <div class="input-field-block">
+          <label class="ios-checkbox-label">
+            <input type="checkbox" id="edit-task-completed">
+            <span>Mark as completed</span>
+          </label>
+        </div>
+
+        <div class="modal-footer-btns">
+          <button type="button" class="glass-btn-subtle" id="cancel-modal-task">Cancel</button>
+          <button type="submit" class="apple-coral-button">Update Assignment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADJUST WELLNESS GOALS -->
+  <div id="modal-wellness-goals" class="ios-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-goals-title">
+    <div class="ios-modal-window modal-compact">
+      <div class="modal-grabber-bar"></div>
+      <div class="modal-top">
+        <h3 id="modal-goals-title">Customize Wellness Targets</h3>
+        <button type="button" class="modal-close-btn" id="close-modal-goals" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="form-wellness-goals" novalidate>
+        <div class="input-field-block">
+          <label for="custom-goal-steps">Daily Step Target</label>
+          <input type="number" id="custom-goal-steps" class="apple-glass-input" min="1000" max="50000" step="500" value="8000">
+        </div>
+
+        <div class="input-field-block">
+          <label for="custom-goal-water">Daily Water Target (ml)</label>
+          <input type="number" id="custom-goal-water" class="apple-glass-input" min="500" max="10000" step="250" value="2500">
+        </div>
+
+        <div class="input-field-block">
+          <label for="custom-goal-sleep">Daily Sleep Target (hours)</label>
+          <input type="number" id="custom-goal-sleep" class="apple-glass-input" min="4" max="14" step="0.5" value="8.0">
+        </div>
+
+        <div class="modal-footer-btns">
+          <button type="button" class="glass-btn-subtle" id="cancel-modal-goals">Cancel</button>
+          <button type="submit" class="apple-coral-button">Save Targets</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: SET EXACT STEPS -->
+  <div id="modal-set-steps" class="ios-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-steps-title">
+    <div class="ios-modal-window modal-compact">
+      <div class="modal-grabber-bar"></div>
+      <div class="modal-top">
+        <h3 id="modal-steps-title">Set Today's Step Count</h3>
+        <button type="button" class="modal-close-btn" id="close-modal-steps" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="form-set-steps" novalidate>
+        <div class="input-field-block">
+          <label for="input-exact-steps">Total Steps Walked Today</label>
+          <input type="number" id="input-exact-steps" class="apple-glass-input" min="0" max="100000" step="100" placeholder="e.g. 6200">
+        </div>
+
+        <div class="modal-footer-btns">
+          <button type="button" class="glass-btn-subtle" id="cancel-modal-steps">Cancel</button>
+          <button type="submit" class="apple-coral-button">Update Steps</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS (iOS NOTIFICATION BUBBLES) -->
+  <div id="toast-shelf" class="ios-toast-shelf" role="status" aria-live="polite"></div>
+
+  <!-- Client-Side Engine -->
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

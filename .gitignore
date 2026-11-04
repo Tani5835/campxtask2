@@ -1,0 +1,28 @@
+# Python Bytecode and Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environments and Secrets
+.env
+.env.*
+venv/
+env/
+.venv/
+*.pem
+*.key
+*.cert
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo

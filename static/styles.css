@@ -1,0 +1,2365 @@
+/* ==========================================================================
+   CAMPXTASK — APPLE iOS NATIVE GLASSMORPHIC EXPERIENCE
+   ========================================================================== */
+
+/* ----------------- 1. DESIGN TOKENS & MATERIAL SYSTEM ----------------- */
+:root {
+  /* Apple System Typography Stack */
+  --font-sf-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  --font-sf-mono: "SF Mono", Menlo, Monaco, "JetBrains Mono", monospace;
+
+  /* Three-Tier Glass Material System (Light Mode) */
+  --glass-ultra-bg: rgba(255, 255, 255, 0.48);
+  --glass-ultra-blur: blur(34px) saturate(190%);
+  --glass-ultra-border: 1px solid rgba(255, 255, 255, 0.75);
+  --glass-ultra-shadow: 
+    0 20px 48px -10px rgba(50, 70, 110, 0.12),
+    0 8px 16px -4px rgba(50, 70, 110, 0.06),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.25);
+
+  --glass-std-bg: rgba(255, 255, 255, 0.38);
+  --glass-std-blur: blur(28px) saturate(180%);
+  --glass-std-border: 1px solid rgba(255, 255, 255, 0.65);
+  --glass-std-shadow: 
+    0 14px 40px -8px rgba(50, 70, 110, 0.09),
+    0 4px 12px -2px rgba(50, 70, 110, 0.04),
+    inset 0 1.2px 0 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.2);
+
+  --glass-subtle-bg: rgba(255, 255, 255, 0.25);
+  --glass-subtle-blur: blur(20px) saturate(160%);
+  --glass-subtle-border: 1px solid rgba(255, 255, 255, 0.5);
+  --glass-subtle-shadow: 
+    0 4px 14px rgba(50, 70, 110, 0.04),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+
+  /* Deep Navy Typography & Apple Slate Metadata */
+  --text-primary: #111D33;
+  --text-secondary: #4A5B78;
+  --text-muted: #7283A0;
+  --text-dim: #9AA7BD;
+
+  /* Apple Coral Accent & Vitality Tints */
+  --accent-coral: #F15B68;
+  --accent-coral-hover: #E04452;
+  --accent-coral-glow: rgba(241, 91, 104, 0.28);
+  --accent-coral-subtle: rgba(241, 91, 104, 0.12);
+
+  --vital-water: #00B0FF;
+  --vital-water-dark: #00838F;
+  --vital-water-bg: rgba(0, 176, 255, 0.12);
+
+  --vital-steps: #FF5630;
+  --vital-steps-bg: rgba(255, 86, 48, 0.12);
+
+  --vital-sleep: #7C4DFF;
+  --vital-sleep-light: #9E7DFF;
+  --vital-sleep-bg: rgba(124, 77, 255, 0.12);
+
+  --vital-indigo: #2979FF;
+  --vital-indigo-bg: rgba(41, 121, 255, 0.12);
+
+  --vital-mint: #00E676;
+  --vital-mint-dark: #00B248;
+  --vital-mint-bg: rgba(0, 230, 118, 0.14);
+
+  --vital-amber: #FF9100;
+  --vital-amber-bg: rgba(255, 145, 0, 0.14);
+
+  --ring-track-color: rgba(30, 50, 85, 0.08);
+
+  --radius-xs: 8px;
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 36px;
+  --radius-full: 9999px;
+}
+
+/* Night Mode — Preserves Pastel Wallpaper with Dark Luminous Glass */
+[data-theme="dark"] {
+  --glass-ultra-bg: rgba(16, 25, 44, 0.75);
+  --glass-ultra-blur: blur(36px) saturate(200%);
+  --glass-ultra-border: 1px solid rgba(255, 255, 255, 0.16);
+  --glass-ultra-shadow: 
+    0 24px 55px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+
+  --glass-std-bg: rgba(16, 25, 44, 0.58);
+  --glass-std-blur: blur(30px) saturate(180%);
+  --glass-std-border: 1px solid rgba(255, 255, 255, 0.12);
+  --glass-std-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+
+  --glass-subtle-bg: rgba(255, 255, 255, 0.06);
+  --glass-subtle-blur: blur(20px) saturate(160%);
+  --glass-subtle-border: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-subtle-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #CBD5E1;
+  --text-muted: #8E9DB2;
+  --text-dim: #64748B;
+
+  --accent-coral: #FF7482;
+  --accent-coral-hover: #FF8F9B;
+  --accent-coral-glow: rgba(255, 116, 130, 0.38);
+  --accent-coral-subtle: rgba(255, 116, 130, 0.18);
+
+  --vital-water: #00E5FF;
+  --vital-water-bg: rgba(0, 229, 255, 0.18);
+
+  --vital-steps: #FF6E40;
+  --vital-steps-bg: rgba(255, 110, 64, 0.18);
+
+  --vital-sleep: #B388FF;
+  --vital-sleep-light: #D1C4E9;
+  --vital-sleep-bg: rgba(179, 136, 255, 0.2);
+
+  --vital-indigo: #448AFF;
+  --vital-indigo-bg: rgba(68, 138, 255, 0.2);
+
+  --vital-mint: #69F0AE;
+  --vital-mint-bg: rgba(105, 240, 174, 0.18);
+
+  --vital-amber: #FFD740;
+  --vital-amber-bg: rgba(255, 215, 64, 0.18);
+
+  --ring-track-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ----------------- 2. THREE-LAYER BACKGROUND ARCHITECTURE ----------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sf-display);
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* LAYER 1: Fullscreen Fixed Pastel Gradient Image Asset */
+.app-bg-layer {
+  position: fixed;
+  inset: -25px;
+  background-image: url('/static/background.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: blur(8px);
+  transform: scale(1.05);
+  z-index: -2;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* LAYER 2: Subtle Atmospheric Blur (Preserves Image Color & Depth) */
+.app-overlay-layer {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: -1;
+  pointer-events: none;
+  transition: background-color 0.4s ease;
+}
+
+[data-theme="dark"] .app-overlay-layer {
+  background: rgba(8, 14, 26, 0.78);
+}
+
+/* LAYER 3: Native Floating App Shell */
+.app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------- 3. FLOATING APPLE GLASS ISLAND NAVIGATION ----------------- */
+.top-nav-glass {
+  position: sticky;
+  top: 1.25rem;
+  z-index: 100;
+  max-width: 1040px;
+  width: calc(100% - 2.5rem);
+  margin: 1.25rem auto 2rem;
+  background: var(--glass-ultra-bg);
+  backdrop-filter: var(--glass-ultra-blur);
+  -webkit-backdrop-filter: var(--glass-ultra-blur);
+  border: var(--glass-ultra-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--glass-ultra-shadow);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-content {
+  padding: 0.55rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Brand Link */
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  outline: none;
+  padding-left: 0.5rem;
+}
+
+.apple-glyph-squircle {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(45, 60, 95, 0.08);
+  color: var(--accent-coral);
+  transition: transform 0.25s ease;
+}
+
+.brand-link:hover .apple-glyph-squircle {
+  transform: rotate(20deg) scale(1.08);
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.app-sub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+/* Apple Segmented Control Pills */
+.view-segments {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.25rem;
+  border-radius: var(--radius-full);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .view-segments {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.view-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  font-family: var(--font-sf-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+}
+
+.view-pill:hover {
+  color: var(--text-primary);
+}
+
+.view-pill.active {
+  color: var(--text-primary);
+  background: #FFFFFF;
+  box-shadow: 
+    0 3px 12px rgba(45, 60, 95, 0.12),
+    0 1px 3px rgba(45, 60, 95, 0.06);
+}
+
+[data-theme="dark"] .view-pill.active {
+  background: rgba(45, 62, 95, 0.85);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* Right Nav Utilities */
+.nav-utilities {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.glass-util-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-subtle-bg);
+  backdrop-filter: var(--glass-subtle-blur);
+  -webkit-backdrop-filter: var(--glass-subtle-blur);
+  border: var(--glass-subtle-border);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: var(--glass-subtle-shadow);
+  transition: all 0.2s ease;
+}
+
+.glass-util-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.dot-indicator {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid #FFFFFF;
+}
+
+.dot-disabled { background: var(--text-dim); }
+.dot-enabled { background: var(--vital-mint); box-shadow: 0 0 6px var(--vital-mint); }
+
+/* Live Digital Clock Capsule */
+.live-clock-capsule {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--glass-subtle-bg);
+  backdrop-filter: var(--glass-subtle-blur);
+  -webkit-backdrop-filter: var(--glass-subtle-blur);
+  border: var(--glass-subtle-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sf-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: var(--glass-subtle-shadow);
+}
+
+.live-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--vital-mint);
+  animation: pulseBeacon 2s infinite;
+}
+
+@keyframes pulseBeacon {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 8px var(--vital-mint); }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Day/Night iOS Toggle Switch */
+.theme-glass-toggle {
+  width: 54px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  cursor: pointer;
+  padding: 2px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-theme="dark"] .theme-glass-toggle {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.theme-knob {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+  transform: translateX(0);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  color: #F59E0B;
+}
+
+.glyph-sun { display: block; }
+.glyph-moon { display: none; }
+
+[data-theme="dark"] .theme-knob {
+  transform: translateX(24px);
+  background: #1E293B;
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .glyph-sun { display: none; }
+[data-theme="dark"] .glyph-moon { display: block; }
+
+/* ----------------- 4. VIEWS WRAPPER & MATERIAL CARDS ----------------- */
+.views-wrapper {
+  max-width: 1040px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.25rem 5rem;
+  flex: 1;
+}
+
+.app-view {
+  display: none;
+  animation: fadeInAppleView 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.app-view.active {
+  display: block;
+}
+
+@keyframes fadeInAppleView {
+  from { opacity: 0; transform: translateY(14px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Glass Material Cards */
+.glass-card {
+  background: var(--glass-std-bg);
+  backdrop-filter: var(--glass-std-blur);
+  -webkit-backdrop-filter: var(--glass-std-blur);
+  border: var(--glass-std-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-std-shadow);
+  padding: 1.85rem 2rem;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 18px 46px -6px rgba(50, 70, 110, 0.12),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.85);
+}
+
+.glass-card-subtle {
+  background: var(--glass-subtle-bg);
+  backdrop-filter: var(--glass-subtle-blur);
+  -webkit-backdrop-filter: var(--glass-subtle-blur);
+  border: var(--glass-subtle-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glass-subtle-shadow);
+  padding: 1.25rem 1.45rem;
+  transition: all 0.22s ease;
+}
+
+/* ----------------- 5. VIEW 1: OVERVIEW SCREEN (APPLE EDITORIAL) ----------------- */
+.overview-editorial-hero {
+  margin-bottom: 2.25rem;
+}
+
+.editorial-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.eyebrow-date {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.ios-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(0, 230, 118, 0.12);
+  border: 1px solid rgba(0, 230, 118, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--vital-mint-dark);
+}
+
+[data-theme="dark"] .ios-status-chip {
+  color: var(--vital-mint);
+}
+
+.pulse-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--vital-mint);
+  animation: pulseBeacon 2s infinite;
+}
+
+.hero-greeting {
+  font-size: 3.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+}
+
+.hero-subtext {
+  font-size: 1.12rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 680px;
+}
+
+/* Asymmetric Apple 2-Column Grid (Not 3 identical boxes!) */
+.overview-asymmetric-layout {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.overview-col-primary,
+.overview-col-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Apple Live Activity: Next Class Spotlight */
+.next-class-spotlight {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.32) 100%);
+}
+
+[data-theme="dark"] .next-class-spotlight {
+  background: linear-gradient(145deg, rgba(20, 32, 58, 0.65) 0%, rgba(14, 22, 40, 0.55) 100%);
+}
+
+.spotlight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.live-activity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--vital-indigo);
+  text-transform: uppercase;
+}
+
+.live-activity-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--vital-indigo);
+  animation: pulseBeacon 2s infinite;
+}
+
+.countdown-capsule {
+  font-family: var(--font-sf-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  color: var(--text-primary);
+}
+
+.spotlight-subject {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.title-with-code {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.5rem;
+}
+
+.apple-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.tag-indigo { background: var(--vital-indigo-bg); color: var(--vital-indigo); }
+.tag-coral { background: var(--vital-steps-bg); color: var(--accent-coral); }
+.tag-mint { background: var(--vital-mint-bg); color: var(--vital-mint-dark); }
+
+.spotlight-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.apple-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.apple-chip strong {
+  color: var(--text-primary);
+}
+
+.spotlight-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: 0.95rem;
+}
+
+[data-theme="dark"] .spotlight-footer {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.faculty-note {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.apple-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: none;
+  font-family: var(--font-sf-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-coral);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.apple-link-btn:hover {
+  transform: translateX(3px);
+}
+
+/* Apple Reminders Widget (Priority Tasks) */
+.today-tasks-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.15rem;
+}
+
+.head-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.apple-squircle-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-coral-soft { background: var(--vital-steps-bg); color: var(--accent-coral); }
+.icon-cyan-soft { background: var(--vital-water-bg); color: var(--vital-water); }
+.icon-lavender-soft { background: var(--vital-sleep-bg); color: var(--vital-sleep-light); }
+.icon-emerald-soft { background: var(--vital-mint-bg); color: var(--vital-mint-dark); }
+
+.card-headline {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.subtle-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.overview-mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.mini-task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  transition: all 0.2s ease;
+}
+
+.mini-task-item:hover {
+  background: rgba(255, 255, 255, 0.45);
+  transform: translateX(2px);
+}
+
+.mini-task-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.mini-check-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--text-muted);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #FFFFFF;
+}
+
+.mini-task-item.is-done .mini-check-circle {
+  background: var(--vital-mint);
+  border-color: var(--vital-mint);
+}
+
+.mini-task-item.is-done .mini-task-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.mini-task-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.mini-task-deadline {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Apple Fitness Concentric Activity Rings Card */
+.apple-fitness-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.fitness-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.score-capsule {
+  font-family: var(--font-sf-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent-coral);
+}
+
+.concentric-rings-wrap {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  margin: 0.5rem auto 1.5rem;
+}
+
+.concentric-rings-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg-track {
+  fill: none;
+  stroke: var(--ring-track-color);
+  stroke-width: 9;
+}
+
+.ring-active-stroke {
+  fill: none;
+  stroke-width: 9;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.stroke-steps {
+  stroke: var(--vital-steps);
+  stroke-dasharray: 339.29;
+  stroke-dashoffset: 339.29;
+}
+
+.stroke-water {
+  stroke: var(--vital-water);
+  stroke-dasharray: 263.89;
+  stroke-dashoffset: 263.89;
+}
+
+.stroke-sleep {
+  stroke: var(--vital-sleep-light);
+  stroke-dasharray: 188.50;
+  stroke-dashoffset: 188.50;
+}
+
+.rings-center-legend {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.center-score-title {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.center-score-sub {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.fitness-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.fitness-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.82rem;
+}
+
+.ring-color-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+}
+
+.bullet-steps { background: var(--vital-steps); }
+.bullet-water { background: var(--vital-water); }
+.bullet-sleep { background: var(--vital-sleep-light); }
+.bullet-tasks { background: var(--vital-mint); }
+
+.metric-name {
+  flex: 1;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.metric-pct {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Compact Apple Health Vitals Shelf (Bottom Row) */
+.overview-vitals-shelf {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.vital-tile {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vital-tile:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.vital-tile-top {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.vital-label {
+  flex: 1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.vital-arrow {
+  font-size: 1.25rem;
+  color: var(--text-dim);
+  line-height: 1;
+}
+
+.vital-big-num {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  display: block;
+}
+
+.vital-target-desc {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+  display: block;
+}
+
+/* ----------------- 6. VIEW 2: WELLNESS (APPLE HEALTH HUB) ----------------- */
+.view-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
+}
+
+.section-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.view-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.glass-btn-ultra {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-ultra-bg);
+  backdrop-filter: var(--glass-ultra-blur);
+  -webkit-backdrop-filter: var(--glass-ultra-blur);
+  border: var(--glass-ultra-border);
+  font-family: var(--font-sf-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: var(--glass-ultra-shadow);
+  transition: all 0.22s ease;
+}
+
+.glass-btn-ultra:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.wellness-tri-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.wellness-tile {
+  display: flex;
+  flex-direction: column;
+}
+
+.w-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.w-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+}
+
+.tag-steps { background: var(--vital-steps-bg); color: var(--vital-steps); }
+.tag-water { background: var(--vital-water-bg); color: var(--vital-water); }
+.tag-sleep { background: var(--vital-sleep-bg); color: var(--vital-sleep-light); }
+
+.w-goal-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Gauge Center Circular Progress Ring */
+.gauge-center-wrapper {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 1.5rem;
+}
+
+.wellness-gauge-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gauge-bg {
+  fill: none;
+  stroke: var(--ring-track-color);
+  stroke-width: 10;
+}
+
+.gauge-fg {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 364.42;
+  stroke-dashoffset: 364.42;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.stroke-coral { stroke: var(--vital-steps); }
+.stroke-water { stroke: var(--vital-water); }
+.stroke-sleep { stroke: var(--vital-sleep-light); }
+
+.gauge-digits {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gauge-squircle {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+
+.digits-hero {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.digits-sub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin: 0.2rem 0;
+}
+
+.digits-pct {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.water-color { color: var(--vital-water); }
+.sleep-color { color: var(--vital-sleep-light); }
+
+/* Apple Quick Action Pills */
+.pill-buttons-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-bottom: 1.5rem;
+}
+
+.apple-glass-pill {
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sf-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: var(--glass-subtle-border);
+  background: var(--glass-subtle-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: var(--glass-subtle-shadow);
+  transition: all 0.2s ease;
+}
+
+.apple-glass-pill:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 60, 95, 0.08);
+}
+
+.pill-dashed {
+  background: transparent;
+  border: 1px dashed var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+.sensor-info-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: 1rem;
+  margin-top: auto;
+}
+
+[data-theme="dark"] .sensor-info-footer {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.sensor-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.sensor-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--vital-mint);
+}
+
+/* ----------------- 7. DISTINCTIVE WATER VESSEL (DRINKING GLASS) ----------------- */
+.water-vessel-presentation {
+  position: relative;
+  width: 170px;
+  height: 185px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.water-glass-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 12px 24px rgba(0, 176, 255, 0.2));
+}
+
+.fluid-wave-path {
+  animation: waveDrift 4s linear infinite;
+}
+
+@keyframes waveDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-60px); }
+}
+
+.bubble-anim {
+  animation: bubbleFloat 3s ease-in-out infinite;
+}
+
+.b1 { animation-delay: 0.2s; }
+.b2 { animation-delay: 1.1s; }
+.b3 { animation-delay: 1.8s; }
+
+@keyframes bubbleFloat {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { transform: translateY(-32px); opacity: 0; }
+}
+
+.water-digits-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Reminder Control Bar */
+.reminder-control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.95rem;
+  border-radius: var(--radius-sm);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  margin-top: auto;
+}
+
+.reminder-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.mini-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.apple-glass-select {
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.6);
+  border: var(--glass-subtle-border);
+  font-family: var(--font-sf-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  outline: none;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .apple-glass-select {
+  background: rgba(20, 32, 58, 0.8);
+}
+
+/* Native iOS Toggle Switch */
+.ios-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.ios-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ios-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-full);
+  transition: 0.3s;
+}
+
+[data-theme="dark"] .ios-slider {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.ios-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #FFFFFF;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+input:checked + .ios-slider {
+  background-color: var(--vital-mint);
+}
+
+input:checked + .ios-slider:before {
+  transform: translateX(20px);
+}
+
+.reminder-disclaimer {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 0.45rem;
+  text-align: center;
+}
+
+/* Sleep Time Capsules */
+.sleep-time-dual-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.sleep-input-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sleep-input-cell label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.apple-time-picker {
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-xs);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  font-family: var(--font-sf-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.sleep-arrow {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+}
+
+.sleep-stats-banner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.glass-btn-primary-mini {
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius-full);
+  background: var(--vital-sleep);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: var(--font-sf-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(124, 77, 255, 0.35);
+  transition: all 0.2s ease;
+}
+
+.glass-btn-primary-mini:hover {
+  background: var(--vital-sleep-light);
+  transform: translateY(-2px);
+}
+
+/* ----------------- 8. VIEW 3: SCHEDULE (ACADEMIC TIMETABLE) ----------------- */
+.schedule-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.glass-segmented-mini {
+  display: inline-flex;
+  padding: 0.25rem;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .glass-segmented-mini {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.seg-btn {
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  font-family: var(--font-sf-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.seg-btn.active {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  box-shadow: 0 2px 6px rgba(45, 60, 95, 0.1);
+}
+
+[data-theme="dark"] .seg-btn.active {
+  background: rgba(45, 62, 95, 0.85);
+  color: #FFFFFF;
+}
+
+.apple-coral-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--accent-coral), var(--accent-coral-hover));
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: var(--font-sf-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  cursor: pointer;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    0 8px 24px var(--accent-coral-glow);
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.apple-coral-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    0 12px 30px var(--accent-coral-glow);
+}
+
+.timetable-hero-card {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.status-live-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--vital-indigo);
+  margin-bottom: 0.45rem;
+}
+
+.subject-hero-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.timetable-details-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.countdown-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+}
+
+.countdown-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.countdown-digits {
+  font-family: var(--font-sf-mono);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.25rem 0;
+}
+
+.countdown-hint {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Timetable Cards Grid */
+.timetable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.class-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.class-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.class-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.class-card-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.day-badge {
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  color: var(--text-secondary);
+}
+
+.day-badge.today-day {
+  background: var(--vital-indigo-bg);
+  border-color: var(--vital-indigo);
+  color: var(--vital-indigo);
+  font-weight: 700;
+}
+
+.class-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: 0.75rem;
+}
+
+[data-theme="dark"] .class-card-actions {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.icon-action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-action-btn:hover {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.icon-action-btn.btn-delete:hover {
+  background: rgba(241, 91, 104, 0.15);
+  color: var(--accent-coral);
+}
+
+/* ----------------- 9. VIEW 4: TASKS (APPLE REMINDERS PLANNER) ----------------- */
+.planner-stats-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.planner-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  font-size: 0.82rem;
+}
+
+.p-lbl { color: var(--text-secondary); font-weight: 500; }
+.p-val { font-weight: 700; color: var(--text-primary); }
+.val-amber { color: var(--vital-amber); }
+.val-emerald { color: var(--vital-mint-dark); }
+[data-theme="dark"] .val-emerald { color: var(--vital-mint); }
+
+.planner-two-col {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.planner-form-card {
+  position: sticky;
+  top: 100px;
+}
+
+.planner-form-head {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.35rem;
+}
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.input-field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.15rem;
+}
+
+.input-field-block label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.coral-star { color: var(--accent-coral); }
+
+.apple-glass-input {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  border-radius: var(--radius-sm);
+  background: var(--glass-subtle-bg);
+  backdrop-filter: var(--glass-subtle-blur);
+  -webkit-backdrop-filter: var(--glass-subtle-blur);
+  border: var(--glass-subtle-border);
+  font-family: var(--font-sf-display);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  outline: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.22s ease;
+}
+
+.apple-glass-input:focus {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--accent-coral);
+  box-shadow: 0 0 0 3px var(--accent-coral-glow);
+}
+
+[data-theme="dark"] .apple-glass-input:focus {
+  background: rgba(24, 38, 64, 0.85);
+}
+
+.apple-textarea {
+  resize: vertical;
+  min-height: 75px;
+}
+
+.field-error-hint {
+  font-size: 0.75rem;
+  color: var(--accent-coral);
+  min-height: 16px;
+}
+
+.btn-full-width {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+/* Tasks Filter Bar */
+.planner-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.task-filter-pill {
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  font-family: var(--font-sf-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.task-filter-pill.active {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  box-shadow: 0 2px 6px rgba(45, 60, 95, 0.1);
+}
+
+[data-theme="dark"] .task-filter-pill.active {
+  background: rgba(45, 62, 95, 0.85);
+  color: #FFFFFF;
+}
+
+.planner-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 230px;
+}
+
+.planner-search-wrap svg {
+  position: absolute;
+  left: 12px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.apple-glass-search {
+  width: 100%;
+  padding: 0.45rem 0.95rem 0.45rem 2.25rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  font-family: var(--font-sf-display);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.apple-glass-search:focus {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--accent-coral);
+}
+
+/* Task Item Card */
+.planner-items-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.task-glass-row,
+.planner-task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--glass-subtle-bg);
+  backdrop-filter: var(--glass-subtle-blur);
+  -webkit-backdrop-filter: var(--glass-subtle-blur);
+  border: var(--glass-subtle-border);
+  transition: all 0.22s ease;
+}
+
+.task-glass-row:hover,
+.planner-task-item:hover {
+  background: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(45, 60, 95, 0.06);
+}
+
+.task-checkbox-custom,
+.task-done-toggle {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--text-muted);
+  background: transparent;
+  cursor: pointer;
+  margin-top: 2px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.task-checkbox-custom.checked,
+.planner-task-item.is-done .task-done-toggle {
+  background: var(--vital-mint);
+  border-color: var(--vital-mint);
+}
+
+.task-checkbox-custom svg,
+.task-done-toggle svg {
+  display: none;
+  color: #FFFFFF;
+}
+
+.task-checkbox-custom.checked svg,
+.planner-task-item.is-done .task-done-toggle svg {
+  display: block;
+}
+
+.task-body-content,
+.planner-task-content {
+  flex: 1;
+}
+
+.task-title-text,
+.planner-task-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+  transition: color 0.2s ease;
+}
+
+.planner-task-item.is-done .planner-task-title,
+.task-glass-row.is-completed .task-title-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.task-desc-text,
+.planner-task-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.45rem;
+}
+
+.task-meta-line,
+.planner-task-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.task-row-actions,
+.planner-task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ----------------- 10. VIEW 5: INSIGHTS (APPLE HEALTH TRENDS) ----------------- */
+.insights-dual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+.chart-tile {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.chart-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.chart-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.chart-badge-stat {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  color: var(--text-primary);
+}
+
+.chart-svg-host {
+  width: 100%;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-center-host {
+  height: 210px;
+}
+
+/* ----------------- 11. MODALS (APPLE iOS SHEETS) ----------------- */
+.ios-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(8, 14, 26, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.ios-modal-backdrop.hidden {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ios-modal-window {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(34px) saturate(190%);
+  -webkit-backdrop-filter: blur(34px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius-lg);
+  box-shadow: 
+    0 28px 65px rgba(0, 0, 0, 0.18),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.9);
+  padding: 1.5rem 2rem 2rem;
+  animation: appleModalPop 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+[data-theme="dark"] .ios-modal-window {
+  background: rgba(20, 32, 58, 0.9);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 32px 75px rgba(0, 0, 0, 0.65);
+}
+
+.modal-compact {
+  max-width: 420px;
+}
+
+.modal-grabber-bar {
+  width: 36px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.18);
+  margin: 0 auto 1.25rem;
+}
+
+[data-theme="dark"] .modal-grabber-bar {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+@keyframes appleModalPop {
+  from { opacity: 0; transform: scale(0.95) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.modal-top h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.modal-close-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .modal-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.modal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.12);
+  color: var(--text-primary);
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.weekdays-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.weekday-pill {
+  cursor: pointer;
+}
+
+.weekday-pill input {
+  display: none;
+}
+
+.weekday-pill span {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.weekday-pill input:checked + span {
+  background: var(--vital-indigo-bg);
+  border-color: var(--vital-indigo);
+  color: var(--vital-indigo);
+  font-weight: 700;
+}
+
+.modal-footer-btns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: 1.15rem;
+}
+
+[data-theme="dark"] .modal-footer-btns {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.glass-btn-subtle {
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  font-family: var(--font-sf-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.glass-btn-subtle:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-primary);
+}
+
+/* ----------------- 12. TOAST NOTIFICATIONS (iOS BUBBLES) ----------------- */
+.ios-toast-shelf {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  pointer-events: none;
+}
+
+.toast-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 12px 30px rgba(45, 60, 95, 0.15);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  pointer-events: auto;
+  animation: appleToastPop 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+[data-theme="dark"] .toast-bubble {
+  background: rgba(20, 32, 58, 0.92);
+  color: #FFFFFF;
+}
+
+@keyframes appleToastPop {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ----------------- 13. MOBILE BOTTOM DOCK ----------------- */
+.mobile-bottom-dock {
+  display: none;
+  position: fixed;
+  bottom: 1.25rem;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dock-capsule {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--glass-ultra-bg);
+  backdrop-filter: var(--glass-ultra-blur);
+  -webkit-backdrop-filter: var(--glass-ultra-blur);
+  border: var(--glass-ultra-border);
+  box-shadow: var(--glass-ultra-shadow);
+  pointer-events: auto;
+}
+
+.dock-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dock-btn.active {
+  background: #FFFFFF;
+  color: var(--accent-coral);
+  box-shadow: 0 2px 8px rgba(45, 60, 95, 0.12);
+}
+
+[data-theme="dark"] .dock-btn.active {
+  background: rgba(45, 62, 95, 0.9);
+}
+
+.app-spacious-footer {
+  text-align: center;
+  padding: 2.5rem 1rem 3.5rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Empty states */
+.empty-glass-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.75rem 2rem;
+  gap: 0.65rem;
+}
+
+.empty-glass-card.hidden { display: none; }
+
+.empty-glyph-squircle {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-subtle-bg);
+  border: var(--glass-subtle-border);
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.empty-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.empty-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  max-width: 400px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ----------------- 14. RESPONSIVE BREAKPOINTS ----------------- */
+@media (max-width: 960px) {
+  .overview-asymmetric-layout {
+    grid-template-columns: 1fr;
+  }
+  .overview-vitals-shelf {
+    grid-template-columns: 1fr;
+  }
+  .wellness-tri-layout {
+    grid-template-columns: 1fr;
+  }
+  .planner-two-col {
+    grid-template-columns: 1fr;
+  }
+  .planner-form-card {
+    position: static;
+  }
+  .insights-dual-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .view-segments {
+    display: none;
+  }
+  .mobile-bottom-dock {
+    display: flex;
+  }
+  .top-nav-glass {
+    width: calc(100% - 1.5rem);
+    margin: 0.75rem auto 1.5rem;
+  }
+  .views-wrapper {
+    padding: 0 0.75rem 6.5rem;
+  }
+  .hero-greeting {
+    font-size: 2.5rem;
+  }
+  .timetable-hero-card {
+    grid-template-columns: 1fr;
+  }
+  .form-grid-2,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
